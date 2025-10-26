@@ -124,11 +124,11 @@ const Header: React.FC = () => {
             </motion.p>
 
             <motion.div custom={3} initial={{ opacity: 0, y: 20 }} animate={controls} className="mt-8 flex flex-col sm:flex-row gap-4">
-                <a href="#portfolio" className="relative group inline-block px-8 py-3 text-white font-bold rounded-lg overflow-hidden bg-gradient-to-r from-brand-blue to-accent-cyan shadow-lg transition-transform duration-300 hover:scale-105">
+                {/* <a href="#portfolio" className="relative group inline-block px-8 py-3 text-white font-bold rounded-lg overflow-hidden bg-gradient-to-r from-brand-blue to-accent-cyan shadow-lg transition-transform duration-300 hover:scale-105">
                     Moje práce
-                </a>
+                </a> */}
                 <a href="#kontakt" className="relative group inline-block px-8 py-3 font-bold rounded-lg border-2 border-gray-300 dark:border-gray-600 hover:border-brand-blue dark:hover:border-accent-cyan transition-all duration-300 hover:shadow-lg">
-                    Kontakt
+                    Kontaktujte mě
                      <span className="absolute inset-0 border-0 group-hover:border-2 rounded-lg border-transparent group-hover:border-accent-cyan transition-all duration-300"></span>
                 </a>
             </motion.div>
