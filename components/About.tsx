@@ -27,10 +27,13 @@ const About: React.FC = () => {
           >
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">Kdo jsem?</h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-              Jsem video editor, který pomáhá klientům zaujmout už v prvních sekundách. Specializuji se jak na krátká videa, tak i na delší formáty - od svižných Reels a TikToků po dynamické vlogy či promo videa.
+              Jsem video editor, který pomáhá klientům zaujmout už v prvních sekundách. Specializuji se jak na krátká videa, tak i na delší formáty.
             </p>
             <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              Mým cílem je vytvářet obsah, který nejen dobře vypadá, ale i funguje. Spolupracuji s podnikateli, značkami i tvůrci, kteří chtějí svůj obsah posunout na vyšší úroveň. Ať už jde o energické sociální klipy nebo storytellingová videa pro YouTube, vždy hledám způsob, jak zachytit pozornost a proměnit ji v zážitek.
+              Mým cílem je vytvářet obsah, který nejen dobře vypadá, ale i funguje. Spolupracuji s podnikateli, značkami i tvůrci, kteří chtějí svůj obsah posunout na vyšší úroveň.
+            </p>
+            <p class="text-lg text-gray-600 dark:text-gray-300 mt-4 leading-relaxed">
+              Ať už jde o energické sociální klipy nebo storytellingová videa pro YouTube, vždy hledám způsob, jak zachytit pozornost a proměnit ji v zážitek.
             </p>
           </motion.div>
         </div>
