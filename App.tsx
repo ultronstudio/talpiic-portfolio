@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Header from './components/Header';
-import Portfolio from './components/Portfolio';
 import Testimonials from './components/Testimonials';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -31,9 +30,8 @@ const App: React.FC = () => {
       <Navigation theme={theme} toggleTheme={toggleTheme} />
       <main>
         <Header />
-        <Portfolio />
-        <Testimonials />
         <About />
+        <Testimonials />
         <Contact />
       </main>
       <Footer />

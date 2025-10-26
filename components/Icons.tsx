@@ -21,9 +21,34 @@ export const MoonIcon = () => (
 );
 
 export const MouseIcon = () => (
-    <div className="w-6 h-10 border-2 border-gray-500 dark:border-gray-400 rounded-full relative">
-        <div className="w-1 h-2 bg-gray-500 dark:bg-gray-400 rounded-full absolute top-2 left-1/2 -translate-x-1/2 animate-bounce"></div>
-    </div>
+  <svg
+    width="24"
+    height="40"
+    viewBox="0 0 24 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="animate-mouse"
+  >
+    <rect
+      x="1"
+      y="1"
+      width="22"
+      height="38"
+      rx="11"
+      stroke="#fff"
+      strokeWidth="2"
+    />
+    <line
+      x1="12"
+      y1="8"
+      x2="12"
+      y2="16"
+      stroke="#fff"
+      strokeWidth="2"
+      strokeLinecap="round"
+      className="mouse-line"
+    />
+  </svg>
 );
 
 export const PlayIcon = () => (
