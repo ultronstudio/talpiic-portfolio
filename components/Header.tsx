@@ -1,57 +1,142 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { MouseIcon } from './Icons';
+
+// A lightweight particle component
+const Particle: React.FC<{ style: React.CSSProperties }> = ({ style }) => (
+  <motion.div
+    className="absolute rounded-full bg-accent-cyan/20 dark:bg-brand-blue/30"
+    style={style}
+    initial={{ opacity: 0, scale: 0 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 1 }}
+  />
+);
+
+const ParticlesBackground: React.FC<{ mousePos: { x: number; y: number } }> = ({ mousePos }) => {
+    const particles = [
+        { size: 150, top: '10%', left: '15%', speed: 0.1 },
+        { size: 250, top: '25%', left: '70%', speed: 0.15 },
+        { size: 100, top: '70%', left: '10%', speed: 0.08 },
+        { size: 200, top: '80%', left: '85%', speed: 0.12 },
+        { size: 120, top: '50%', left: '40%', speed: 0.05 },
+    ];
+
+    const offsetX = (mousePos.x / window.innerWidth - 0.5) * 50;
+    const offsetY = (mousePos.y / window.innerHeight - 0.5) * 50;
+
+    return (
+        <motion.div 
+            className="absolute inset-0 z-0 overflow-hidden"
+            animate={{ x: -offsetX, y: -offsetY }}
+            transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+        >
+            {particles.map((p, i) => (
+                <Particle
+                    key={i}
+                    style={{
+                        width: p.size,
+                        height: p.size,
+                        top: p.top,
+                        left: p.left,
+                        filter: 'blur(80px)',
+                    }}
+                />
+            ))}
+        </motion.div>
+    );
+};
+
+const logoText = "TALPIC";
+
+const logoContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const logoLetterVariants = {
+  hidden: { y: 40, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 120,
+      damping: 12,
+    },
+  },
+};
+
 
 const Header: React.FC = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const controls = useAnimation();
 
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
+    useEffect(() => {
+        const handleMouseMove = (event: MouseEvent) => {
+            setMousePosition({ x: event.clientX, y: event.clientY });
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        
+        // Stagger the animation of elements appearing after the logo
+        controls.start(i => ({
+            opacity: 1,
+            y: 0,
+            transition: { delay: i * 0.15 + 1.0, type: 'spring', stiffness: 120 },
+        }));
+
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+        };
+    }, [controls]);
 
   return (
-    <header className="relative flex flex-col items-center justify-center h-screen text-center px-6 bg-gray-900 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-transparent to-purple-500/20 z-0 animate-gradient-move"></div>
-        <div className="absolute inset-0 backdrop-blur-sm z-10"></div>
-        
-        <div className="relative z-20">
-            <h1 className={`text-5xl md:text-7xl lg:text-8xl font-extrabold uppercase tracking-wider transition-all duration-700 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">
-                TALPIC
-                </span>
-            </h1>
-            <p className={`mt-4 text-lg md:text-xl text-gray-300 transition-all duration-700 ease-out delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
+    <header className="relative h-screen w-full flex items-center justify-center text-center overflow-hidden bg-soft-bg dark:bg-dark-bg">
+        <div className="absolute inset-0 bg-gradient-to-br from-soft-bg via-transparent to-soft-bg dark:from-dark-bg dark:via-transparent dark:to-dark-bg z-10"/>
+        <ParticlesBackground mousePos={mousePosition} />
+      
+        <div className="relative z-20 flex flex-col items-center">
+            <motion.h1
+                className="font-heading text-7xl md:text-9xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-accent-cyan bg-[length:200%_auto] animate-gradient-x"
+                style={{ filter: 'drop-shadow(0 0 15px rgba(0, 183, 239, 0.3))' }}
+                variants={logoContainerVariants}
+                initial="hidden"
+                animate="visible"
+            >
+              {logoText.split('').map((char, index) => (
+                <motion.span key={index} variants={logoLetterVariants} className="inline-block">
+                  {char}
+                </motion.span>
+              ))}
+            </motion.h1>
+
+            <motion.p custom={1} initial={{ opacity: 0, y: 20 }} animate={controls} className="mt-4 text-lg md:text-xl font-medium tracking-wider">
                 🎥 Video editor | Short & Long Form
-            </p>
-            <p className={`mt-6 max-w-2xl mx-auto text-md md:text-lg text-gray-400 transition-all duration-700 ease-out delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
-                🚀 1+ rok zkušeností, silné výsledky <br className="hidden sm:block" />
-                💡 Pomůžu ti zaujmout víc lidí
-            </p>
-            <div className={`mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-700 ease-out delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
-                <a href="#portfolio" className="w-full sm:w-auto px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105">
+            </motion.p>
+            <motion.p custom={2} initial={{ opacity: 0, y: 20 }} animate={controls} className="mt-2 text-sm md:text-base text-gray-600 dark:text-gray-400">
+                🚀 1+ rok zkušeností, silné výsledky · 💡 Pomůžu ti zaujmout víc lidí
+            </motion.p>
+
+            <motion.div custom={3} initial={{ opacity: 0, y: 20 }} animate={controls} className="mt-8 flex flex-col sm:flex-row gap-4">
+                <a href="#portfolio" className="relative group inline-block px-8 py-3 text-white font-bold rounded-lg overflow-hidden bg-gradient-to-r from-brand-blue to-accent-cyan shadow-lg transition-transform duration-300 hover:scale-105">
                     Moje práce
                 </a>
-                <a href="#contact" className="w-full sm:w-auto px-8 py-3 bg-gray-700 text-white font-semibold rounded-lg shadow-lg hover:bg-gray-600 transition-all duration-300">
+                <a href="#kontakt" className="relative group inline-block px-8 py-3 font-bold rounded-lg border-2 border-gray-300 dark:border-gray-600 hover:border-brand-blue dark:hover:border-accent-cyan transition-all duration-300 hover:shadow-lg">
                     Kontakt
+                     <span className="absolute inset-0 border-0 group-hover:border-2 rounded-lg border-transparent group-hover:border-accent-cyan transition-all duration-300"></span>
                 </a>
-            </div>
+            </motion.div>
         </div>
-        
-        <nav className="absolute top-0 left-0 right-0 p-6 z-20">
-            <div className="container mx-auto flex justify-center md:justify-end">
-                <div className="flex items-center space-x-6 text-gray-300">
-                    <a href="#portfolio" className="hover:text-indigo-400 transition-colors duration-300">Portfolio</a>
-                    <a href="#testimonials" className="hover:text-indigo-400 transition-colors duration-300">Recenze</a>
-                    <a href="#about" className="hover:text-indigo-400 transition-colors duration-300">O mně</a>
-                    <a href="#contact" className="hover:text-indigo-400 transition-colors duration-300">Kontakt</a>
-                </div>
-            </div>
-        </nav>
 
-        <a href="#portfolio" aria-label="Scroll down" className={`absolute bottom-10 left-1/2 -translate-x-1/2 z-20 transition-opacity duration-1000 delay-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-            <div className="w-6 h-10 border-2 border-gray-400/50 rounded-full flex justify-center items-start p-1 animate-bounce-slow">
-                <div className="w-1 h-2 rounded-full bg-gray-400/80"></div>
-            </div>
-        </a>
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
+            <MouseIcon />
+        </div>
     </header>
   );
 };

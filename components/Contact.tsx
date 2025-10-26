@@ -1,75 +1,81 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { MailIcon, DiscordIcon } from '../constants';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { EmailIcon, InstagramContactIcon } from './Icons';
 
-const AnimateOnScroll: React.FC<{ children: React.ReactNode; delay?: number, className?: string }> = ({ children, delay = 0, className }) => {
-    const [isVisible, setIsVisible] = useState(false);
-    const ref = useRef<HTMLDivElement>(null);
+const contactMethods = [
+  {
+    icon: <EmailIcon />,
+    title: 'Email',
+    value: 'ttapla.business@gmail.com',
+    href: 'mailto:ttapla.business@gmail.com',
+  },
+  {
+    icon: <InstagramContactIcon />,
+    title: 'Instagram',
+    value: '@talpiic',
+    href: 'https://www.instagram.com/talpiic',
+  },
+];
 
-    useEffect(() => {
-        const element = ref.current;
-        if (!element) return;
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    observer.unobserve(element);
-                }
-            },
-            { threshold: 0.1 }
-        );
-
-        observer.observe(element);
-
-        return () => {
-            if (element) {
-                observer.unobserve(element);
-            }
-        };
-    }, []);
-
-    return (
-        <div 
-            ref={ref} 
-            className={`${className} transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-            style={{ transitionDelay: `${delay}ms` }}
-        >
-            {children}
-        </div>
-    );
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      type: 'spring',
+    },
+  }),
 };
 
 const Contact: React.FC = () => {
   return (
-    <section id="contact" className="py-20 text-center">
-        <AnimateOnScroll>
-            <h2 className="text-4xl font-extrabold mb-4">Pojďme tvořit!</h2>
-            <p className="text-gray-400 mb-12 max-w-2xl mx-auto">
-                Máš projekt nebo nápad? Napiš mi a společně vytvoříme něco úžasného.
-            </p>
-        </AnimateOnScroll>
-      <div className="flex flex-col md:flex-row justify-center items-center gap-8">
-        
-        <AnimateOnScroll delay={150} className="w-full md:w-auto">
-            <a href="mailto:ahoj@talpiic.com" className="group block">
-                <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-indigo-500 transition-all duration-300 transform hover:-translate-y-1">
-                    <MailIcon className="w-12 h-12 mx-auto text-indigo-400 group-hover:text-indigo-300 transition-colors" />
-                    <h3 className="text-2xl font-bold mt-4">E-mail</h3>
-                    <p className="text-gray-400 mt-2 group-hover:text-white transition-colors">ahoj@talpiic.com</p>
-                </div>
-            </a>
-        </AnimateOnScroll>
+    <section id="kontakt" className="py-20 md:py-32 bg-gray-50 dark:bg-dark-bg/50">
+      <div className="container mx-auto px-6 text-center">
+        <motion.h2
+          className="text-4xl md:text-5xl font-heading font-bold mb-4"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Pojďme tvořit!
+        </motion.h2>
+        <motion.p 
+          className="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          Chceš se zviditelnit? Napiš mi a domluvíme se!
+        </motion.p>
+        <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+          {contactMethods.map((method, index) => (
+            <motion.a
+              key={method.title}
+              href={method.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative p-8 w-full md:w-80 h-48 flex flex-col justify-center items-center bg-white dark:bg-dark-card rounded-2xl shadow-lg overflow-hidden group"
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={index}
+              whileHover={{ y: -10, transition: { type: 'spring', stiffness: 300 } }}
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-blue to-accent-cyan transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              
+              <div className="text-brand-blue dark:text-accent-cyan mb-4">{method.icon}</div>
+              <h3 className="font-heading text-2xl font-bold">{method.title}</h3>
+              <p className="text-gray-500">{method.value}</p>
 
-        <AnimateOnScroll delay={300} className="w-full md:w-auto">
-            <div className="group">
-                <div className="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-purple-500 transition-all duration-300 transform hover:-translate-y-1">
-                    <DiscordIcon className="w-12 h-12 mx-auto text-purple-400 group-hover:text-purple-300 transition-colors" />
-                    <h3 className="text-2xl font-bold mt-4">Discord</h3>
-                    <p className="text-gray-400 mt-2 group-hover:text-white transition-colors">talpiic</p>
-                </div>
-            </div>
-        </AnimateOnScroll>
-
+              <div className="absolute -bottom-16 -right-16 w-32 h-32 bg-accent-cyan/10 rounded-full group-hover:scale-[8] transition-transform duration-700 ease-in-out -z-0"/>
+            </motion.a>
+          ))}
+        </div>
       </div>
     </section>
   );

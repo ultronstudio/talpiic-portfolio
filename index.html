@@ -1,63 +1,72 @@
+
 <!DOCTYPE html>
-<html lang="cs" class="scroll-smooth">
+<html lang="en">
   <head>
-    <!-- meta -->
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Petr Vurm" />
-    <meta name="description" content="Jsem editor videí, s více než ročními zkušenostmi v oboru. Nabízím profesionální střih videí, úpravu zvuku a barevnou korekci. Specializuji se na tvorbu reklamních spotů, hudebních videí a dokumentárních filmů." />
-    <meta name="keywords" content="video editor, střih videí, úprava zvuku, barevná korekce, reklamní spoty, hudební videa, dokumentární filmy" />
-    <meta name="theme-color" content="#1e3a8a" />
-
-    <!-- og -->
-    <meta property="og:title" content="TALPIC - Video Editor" />
-    <meta property="og:description" content="Jsem editor videí, s více než ročními zkušenostmi v oboru. Nabízím profesionální střih videí, úpravu zvuku a barevnou korekci. Specializuji se na tvorbu reklamních spotů, hudebních videí a dokumentárních filmů." />
-    <meta property="og:url" content="https://talpiic.petrvurm.cz" />
-
     <title>TALPIC - Video Editor</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              heading: ['Poppins', 'sans-serif'],
+            },
+            colors: {
+              'brand-blue': '#001CBA',
+              'accent-cyan': '#00B7EF',
+              'soft-bg': '#F6F9FF',
+              'dark-bg': '#0D1117',
+              'dark-card': '#161B22',
+            },
+            animation: {
+              'gradient-x': 'gradient-x 5s ease infinite',
+              'float': 'float 6s ease-in-out infinite',
+            },
+            keyframes: {
+              'gradient-x': {
+                '0%, 100%': { 'background-position': '0% 50%' },
+                '50%': { 'background-position': '100% 50%' },
+              },
+              'float': {
+                '0%, 100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-20px)' },
+              }
+            }
+          },
+        },
+      }
+    </script>
     <style>
+      /* For smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
       body {
-        font-family: 'Poppins', sans-serif;
-      }
-      @keyframes gradient-move {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-      .animate-gradient-move {
-        background-size: 200% 200%;
-        animation: gradient-move 15s ease infinite;
-      }
-      @keyframes bounce {
-        0%, 100% {
-          transform: translateY(-25%);
-          animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-        }
-        50% {
-          transform: translateY(0);
-          animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-        }
-      }
-      .animate-bounce-slow {
-        animation: bounce 2s infinite;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
     </style>
   <script type="importmap">
 {
   "imports": {
-    "react/": "https://esm.sh/react@^19.1.1/",
-    "react": "https://esm.sh/react@^19.1.1",
-    "react-dom/": "https://esm.sh/react-dom@^19.1.1/"
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24"
   }
 }
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-gray-900 text-gray-100">
+  <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
