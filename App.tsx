@@ -6,6 +6,7 @@ import Testimonials from './components/Testimonials';
 import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Portfolio from './components/Portfolio';
 
 type Theme = 'light' | 'dark';
 
@@ -31,6 +32,7 @@ const App: React.FC = () => {
       <main>
         <Header />
         <About />
+        <Portfolio />
         <Testimonials />
         <Contact />
       </main>

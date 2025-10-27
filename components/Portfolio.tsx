@@ -5,28 +5,16 @@ import { PlayIcon, CloseIcon } from './Icons';
 const portfolioItems = [
   {
     title: 'Short Form Content',
-    description: 'Svižná a energická videa pro Reels & TikTok.',
-    imageUrl: 'https://picsum.photos/seed/shortform1/600/400',
-    videoUrl: 'https://www.youtube.com/embed/p6A-GAm_d8c',
+    description: 'Svižná a energická videa pro Instagram & TikTok.',
+    imageUrl: 'https://placehold.co/600x400/FFF/000/png?text=PHOTO 1',
+    videoUrl: `https://faketube.cz/embed/1Q04i3CBsqN?feature=oembed&utm_source=${encodeURIComponent(window.location.href)}&utm_medium=embed&utm_campaign=talpic_portfolio`,
   },
   {
     title: 'Long Form Content',
     description: 'Propracovaná a storytellingová videa pro YouTube.',
-    imageUrl: 'https://picsum.photos/seed/longform1/600/400',
-    videoUrl: 'https://www.youtube.com/embed/z2g9-3sb8sU',
-  },
-   {
-    title: 'Promo Videa',
-    description: 'Dynamické spoty pro propagaci značky nebo produktu.',
-    imageUrl: 'https://picsum.photos/seed/promo/600/400',
-    videoUrl: 'https://www.youtube.com/embed/IMx-18s-m5A',
-  },
-   {
-    title: 'Sociální Klipy',
-    description: 'Kreativní obsah, který zaujme na sociálních sítích.',
-    imageUrl: 'https://picsum.photos/seed/social/600/400',
-    videoUrl: 'https://www.youtube.com/embed/843z_G2AN-I',
-  },
+    imageUrl: 'https://placehold.co/600x400/FFF/000/png?text=PHOTO 2',
+    videoUrl: `https://faketube.cz/embed/1Q04i3CBsqN?feature=oembed&utm_source=${encodeURIComponent(window.location.href)}&utm_medium=embed&utm_campaign=talpic_portfolio`,
+  }
 ];
 
 const cardVariants = {
@@ -151,8 +139,8 @@ const Portfolio: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-          >
-            Ukázka Práce
+          > 
+            Ukázky mé práce
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {portfolioItems.map((item, index) => (

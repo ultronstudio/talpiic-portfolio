@@ -14,7 +14,7 @@ const About: React.FC = () => {
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img src="https://picsum.photos/seed/talpic-portrait/600/700" alt="TALPIC Portrait" className="w-full h-auto" />
+              <img src="https://placehold.co/600x700/FFF/000/png?text=PHOTO" alt="TALPIC Portrait" className="w-full h-auto" />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/20 to-transparent"></div>
             </div>
              <div className="absolute -top-4 -left-4 w-full h-full rounded-2xl border-4 border-accent-cyan/50 -z-10"></div>

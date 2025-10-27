@@ -19,6 +19,7 @@ const Navigation: React.FC<NavigationProps> = ({ theme, toggleTheme }) => {
   }, []);
 
   const navLinks = [
+    { href: '#portfolio', label: 'Portfolio' },
     { href: '#recenze', label: 'Recenze' },
     { href: '#o-mne', label: 'O mně' },
     { href: '#kontakt', label: 'Kontakt' },
