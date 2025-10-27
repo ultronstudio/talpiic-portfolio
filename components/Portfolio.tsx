@@ -7,13 +7,13 @@ const portfolioItems = [
     title: 'Short Form Content',
     description: 'Svižná a energická videa pro Instagram & TikTok.',
     imageUrl: 'https://placehold.co/600x400/FFF/000/png?text=PHOTO 1',
-    videoUrl: `https://faketube.cz/embed/1Q04i3CBsqN?feature=oembed&utm_source=${encodeURIComponent(window.location.href)}&utm_medium=embed&utm_campaign=talpic_portfolio`,
+    videoUrl: `https://www.youtube-nocookie.com/embed/NX-i0IWl3yg?feature=oembed&utm_source=${encodeURIComponent(window.location.href)}&utm_medium=embed&utm_campaign=talpic_portfolio`,
   },
   {
     title: 'Long Form Content',
     description: 'Propracovaná a storytellingová videa pro YouTube.',
     imageUrl: 'https://placehold.co/600x400/FFF/000/png?text=PHOTO 2',
-    videoUrl: `https://faketube.cz/embed/1Q04i3CBsqN?feature=oembed&utm_source=${encodeURIComponent(window.location.href)}&utm_medium=embed&utm_campaign=talpic_portfolio`,
+    videoUrl: `https://www.youtube-nocookie.com/embed/NX-i0IWl3yg?feature=oembed&utm_source=${encodeURIComponent(window.location.href)}&utm_medium=embed&utm_campaign=talpic_portfolio`,
   }
 ];
 
