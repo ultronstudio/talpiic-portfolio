@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
           &copy; {new Date().getFullYear()} TALPIC. Všechna práva vyhrazena.
         </p>
         <p className="text-xs mt-2">
-          Web vytvořil <a href="#" className="underline hover:text-brand-blue dark:hover:text-accent-cyan">Petr Vurm</a>
+          Web vytvořil <a href="https://petrvurm.cz/?utm_source=talpic_portfolio&utm_medium=website&utm_campaign=footer_credit" className="underline hover:text-brand-blue dark:hover:text-accent-cyan">Petr Vurm</a>
         </p>
       </div>
     </footer>
